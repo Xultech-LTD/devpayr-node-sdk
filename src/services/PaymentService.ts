@@ -27,9 +27,15 @@ export class PaymentService {
 
     /**
      * Check payment status using a license key (no project ID needed).
+     *
+     * IMPORTANT:
+     * - This endpoint reads "action" and "include" from the query string.
+     * - It accepts a JSON body (even if empty).
      */
     public async checkWithLicenseKey(queryParams: Record<string, any> = {}): Promise<any> {
         const url = 'project/has-paid';
-        return this.http.post(url, queryParams);
+
+        // Send an empty JSON body, put switches in query string.
+        return this.http.post(url, {}, { params: queryParams });
     }
 }

@@ -5,7 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e95440d6-a83e-4b5e-8095-fc78da7453aa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/examples/00-paid-basic.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/01-paid-with-injectables.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/02-unpaid.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/03-domain-not-registered.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/04-no-domain-fingerprint.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/examples/05-cache-domain-aware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/npmignore" beforeDir="false" afterPath="$PROJECT_DIR$/npmignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/defaultConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/defaultConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contracts/ConfigContract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/contracts/ConfigContract.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/DevPayr.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/DevPayr.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/RuntimeValidator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/RuntimeValidator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/validateLicense.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/validateLicense.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/PaymentService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PaymentService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/HttpClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/HttpClient.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +45,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -42,14 +61,17 @@
   &quot;keyToString&quot;: {
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.laravel-idea.search-composer-json&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Kopiumapps/devpayr-sdks/devpayr-node-sdk&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\HP\\Documents\\My Personal projects\\DevPayr Project\\devpayr-node-sdk\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Kopiumapps\\devpayr-sdks\\devpayr-node-sdk\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -61,8 +83,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PS-242.23339.16" />
-        <option value="bundled-php-predefined-a98d8de5180a-90914f2295cb-com.jetbrains.php.sharedIndexes-PS-242.23339.16" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-PS-252.23892.419" />
+        <option value="bundled-php-predefined-a98d8de5180a-c72577f2c82f-com.jetbrains.php.sharedIndexes-PS-252.23892.419" />
       </set>
     </attachedChunks>
   </component>
@@ -79,6 +101,8 @@
       <workItem from="1750253216889" duration="7619000" />
       <workItem from="1750262305809" duration="730000" />
       <workItem from="1750322839221" duration="795000" />
+      <workItem from="1766583565756" duration="619000" />
+      <workItem from="1766589502514" duration="5666000" />
     </task>
     <servers />
   </component>

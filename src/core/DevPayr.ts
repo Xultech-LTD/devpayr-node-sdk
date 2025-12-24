@@ -7,9 +7,8 @@ import { LicenseService } from '../services/LicenseService';
 import { DomainService } from '../services/DomainService';
 import { InjectableService } from '../services/InjectableService';
 import { PaymentService } from '../services/PaymentService';
-import { DevPayrException } from '../support/Exceptions';
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 export class DevPayr {
     private static configInstance: Config;
@@ -33,26 +32,36 @@ export class DevPayr {
                 onReady(data);
             }
         } catch (e: any) {
-            this.handleFailure(e.message ?? 'License validation failed', userConfig);
+            const message = e?.message ?? 'License validation failed';
+            this.handleFailure(message);
         }
     }
 
     /**
      * Handle invalid license failure depending on mode.
+     * Uses the merged/normalized config from Config (not raw userConfig).
      */
-    private static handleFailure(message: string, config: Record<string, any>): void {
-        const mode = config['invalidBehavior'] ?? 'modal';
-        const finalMessage = config['customInvalidMessage'] ?? message;
+    private static handleFailure(message: string): void {
+        type InvalidBehavior = 'log' | 'modal' | 'redirect' | 'silent';
+
+        const mode = this.configInstance.get<InvalidBehavior>('invalidBehavior', 'modal');
+        const finalMessage = this.configInstance.get<string>('customInvalidMessage', message);
 
         switch (mode) {
-            case 'redirect':
-                const target = config['redirectUrl'] ?? 'https://devpayr.com/upgrade';
-                if (typeof window !== 'undefined') {
+            case 'redirect': {
+                const target =
+                    this.configInstance?.get('redirectUrl', 'https://devpayr.com/upgrade') ??
+                    'https://devpayr.com/upgrade';
+
+                if (typeof window !== 'undefined' && window?.location) {
                     window.location.href = target;
                 } else {
-                    console.error(`[DevPayr] Redirect failed. Use in browser context.`);
+                    console.error(`[DevPayr] Redirect failed. Not running in a browser context.`);
+                    console.error(`[DevPayr] Redirect target: ${target}`);
+                    console.error(`[DevPayr] Message: ${finalMessage}`);
                 }
                 break;
+            }
 
             case 'log':
                 console.error(`[DevPayr] License validation failed: ${finalMessage}`);
@@ -62,27 +71,30 @@ export class DevPayr {
                 break;
 
             case 'modal':
-            default:
-                const customPath = config['customInvalidView'];
+            default: {
+                const customPath = this.configInstance?.get('customInvalidView', null);
                 const defaultPath = path.resolve(__dirname, '../resources/views/unlicensed.html');
-                const htmlPath = customPath ?? defaultPath;
+                const htmlPath = (customPath as string | null) ?? defaultPath;
 
                 try {
                     let html = fs.readFileSync(htmlPath, 'utf-8');
                     html = html.replace('{{message}}', finalMessage);
 
-                    if (typeof document !== 'undefined') {
+                    if (typeof document !== 'undefined' && document?.body) {
                         const container = document.createElement('div');
                         container.innerHTML = html;
                         document.body.appendChild(container);
                     } else {
+                        // Node context fallback
                         console.log(html);
                     }
                 } catch {
-                    console.log(`<h1>⚠️ Unlicensed Software</h1><p>${finalMessage}</p>`);
+                    // last-resort fallback (works everywhere)
+                    console.log(`⚠️ Unlicensed Software\n\n${finalMessage}`);
                 }
 
                 break;
+            }
         }
     }
 

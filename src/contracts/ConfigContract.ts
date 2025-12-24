@@ -3,6 +3,13 @@ export interface ConfigContract {
     base_url: string;
     secret: string;
 
+    /**
+     * Domain (or stable fingerprint fallback) used for domain-aware checks.
+     * - If not provided by user, SDK auto-resolves from environment variables.
+     * - If still not available, SDK generates & persists a fingerprint.
+     */
+    domain: string;
+
     // Optional but critical
     license?: string | null;
     api_key?: string | null;
@@ -25,6 +32,7 @@ export interface ConfigContract {
     redirectUrl?: string | null;
     customInvalidView?: any; // can be HTML string, component, or custom handler
     customInvalidMessage?: string;
+    cachePath?: string | null;
 
     // Hooks
     onReady?: ((response: any) => void) | null;

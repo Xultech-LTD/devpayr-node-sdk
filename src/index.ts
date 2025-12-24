@@ -1,3 +1,5 @@
+// src/index.ts
+
 // Core
 export { DevPayr } from './core/DevPayr';
 export { Config } from './core/Config';

@@ -1,4 +1,4 @@
-import { requiredConfig, defaultConfig } from '../config/defaultConfig';
+import { requiredConfig, defaultConfig, resolveDevPayrDomain } from '../config/defaultConfig';
 import { ConfigContract } from '../contracts/ConfigContract';
 import { DevPayrException } from '../support/Exceptions';
 
@@ -11,6 +11,9 @@ export class Config {
             ...defaultConfig,
             ...userConfig,
         } as ConfigContract;
+
+        // Resolve domain BEFORE required validation (user-supplied domain always wins)
+        this.config.domain = resolveDevPayrDomain(this.config.domain);
 
         // Validate required fields
         for (const key in requiredConfig) {

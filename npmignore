@@ -1,6 +1,7 @@
 # Don't publish source code
 /src
 /tests
+/.devpayr-cache
 
 # Ignore configuration and tooling files
 tsconfig.json

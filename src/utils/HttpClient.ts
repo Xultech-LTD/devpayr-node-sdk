@@ -25,16 +25,31 @@ export class HttpClient {
         uri: string,
         options: AxiosRequestConfig = {}
     ): Promise<any> {
+        const userHeaders = (options.headers ?? {}) as Record<string, string>;
+
+        // Start with defaults, then user headers, then enforced headers (auth/domain) last.
         const headers: Record<string, string> = {
             Accept: 'application/json',
-            ...(options.headers as Record<string, string>),
+            ...userHeaders,
         };
 
-        if (['POST', 'PUT', 'PATCH'].includes(method) && !options?.headers?.['Content-Type']) {
+        // Ensure Content-Type when sending a body unless user explicitly set it.
+        if (
+            ['POST', 'PUT', 'PATCH'].includes(method) &&
+            !('Content-Type' in headers) &&
+            !(options.data instanceof FormData)
+        ) {
             headers['Content-Type'] = 'application/json';
         }
 
-        // Inject authentication headers
+        // Always send domain header
+        // Config guarantees domain exists (hostname or fingerprint)
+        const domain = this.config.get<string>('domain');
+        if (domain) {
+            headers['X-Devpayr-Domain'] = domain;
+        }
+
+        // Inject authentication headers (these should win over user headers)
         if (this.config.isApiKeyMode()) {
             headers['X-API-KEY'] = this.config.get('api_key');
         }
@@ -45,7 +60,7 @@ export class HttpClient {
 
         // Append global query params
         const query: Record<string, any> = {
-            ...options.params,
+            ...(options.params ?? {}),
         };
 
         if (this.config.get('injectables')) {
@@ -62,16 +77,16 @@ export class HttpClient {
 
         try {
             const response = await this.client.request({
+                ...options,
                 method,
                 url: uri,
                 headers,
                 params: query,
-                ...options,
             });
 
             if (response.status >= 400 || typeof response.data !== 'object') {
                 throw new HttpRequestException(
-                    response.data?.message ?? 'API Error',
+                    (response.data as any)?.message ?? 'API Error',
                     response.status,
                     response.data ?? { raw: response.data }
                 );
