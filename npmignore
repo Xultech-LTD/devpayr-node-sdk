@@ -2,6 +2,7 @@
 /src
 /tests
 /.devpayr-cache
+/cache
 
 # Ignore configuration and tooling files
 tsconfig.json
